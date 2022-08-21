@@ -8,20 +8,18 @@ public class JdbcEjemplo {
     String url = "jdbc:mysql://localhost:3306/java_curso";
     String username = "root";
     String password = "sasa";
-
-    try {
-      Connection conn = DriverManager.getConnection(url, username, password);
-      Statement stmt = conn.createStatement();
-      ResultSet result = stmt.executeQuery("SELECT * FROM productos");
+    //Poniendo las declaraciones enfrente del "try" evito hacer los "close" de cada uno
+    try ( Connection conn = DriverManager.getConnection(url, username, password);
+          Statement stmt = conn.createStatement();
+          ResultSet result = stmt.executeQuery("SELECT * FROM productos") ) {
 
       System.out.println("---- Resultados de consulta ----");
       while( result.next() ) {
-        System.out.println("Resultado de id: " + result.getInt("id"));
-        System.out.println("Resultado de nombre: " + result.getString("nombre"));
+        System.out.print(result.getInt("id") + " | ");
+        System.out.print(result.getString("nombre") + " | ");
+        System.out.print(result.getInt("precio") + " | ");
+        System.out.println("Resultado de fecha: " + result.getDate("fecha_registro"));
       }
-      result.close();
-      stmt.close();
-      conn.close();
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
