@@ -1,15 +1,13 @@
 package org.rivera.java.jdbc;
 
+import org.rivera.java.jdbc.util.ConexionBaseDatos;
+
 import java.sql.*;
 
 public class JdbcEjemplo {
   public static void main(String[] args) {
-
-    String url = "jdbc:mysql://localhost:3306/java_curso";
-    String username = "root";
-    String password = "sasa";
     //Poniendo las declaraciones enfrente del "try" evito hacer los "close" de cada uno
-    try ( Connection conn = DriverManager.getConnection(url, username, password);
+    try ( Connection conn = ConexionBaseDatos.getInstance();
           Statement stmt = conn.createStatement();
           ResultSet result = stmt.executeQuery("SELECT * FROM productos") ) {
 
