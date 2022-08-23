@@ -50,4 +50,12 @@ public class Producto {
   public void setRegisterDate(Date registerDate) {
     this.registerDate = registerDate;
   }
+
+  @Override
+  public String toString() {
+    return "id = " + id +
+            ", name = " + name +
+            ", price = " + price +
+            ", registerDate = " + registerDate;
+  }
 }
