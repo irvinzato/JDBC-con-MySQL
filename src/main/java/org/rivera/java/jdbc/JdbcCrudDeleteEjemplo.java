@@ -7,10 +7,9 @@ import org.rivera.java.jdbc.util.ConexionBaseDatos;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Date;
 
 
-public class JdbcCrudEjemplo {
+public class JdbcCrudDeleteEjemplo {
   public static void main(String[] args) {
 
     try (Connection conn = ConexionBaseDatos.getInstance()) {
@@ -18,16 +17,11 @@ public class JdbcCrudEjemplo {
       Repositorio<Producto> repository = new ProductoRepositorioImpl();
       repository.findAll().forEach(System.out::println);
 
-      System.out.println("---- Búsqueda por ID ----");
-      System.out.println(repository.byId(2L));
-
-      System.out.println("---- Creación de nuevo producto ----");
-      Producto product = new Producto();
-      product.setName("CPU Yeiyan Elim");
-      product.setPrice(12000);
-      product.setRegisterDate(new Date());
-      repository.save(product);
-      System.out.println("Producto guardado con éxito");
+      System.out.println("---- Eliminar producto ----");
+      Producto producto = new Producto();
+      producto.setId(4L);
+      repository.delete( producto.getId() );
+      System.out.println("Producto eliminado con éxito");
       repository.findAll().forEach(System.out::println);
 
     } catch (SQLException e) {
