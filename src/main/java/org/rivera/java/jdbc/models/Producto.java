@@ -8,6 +8,7 @@ public class Producto {
   private String name;
   private Integer price;
   private Date registerDate;
+  private Categoria categoria; //Relación entre objetos(Como lo diseñe en mis tablas SQL, llave foránea)
 
   public Producto() {
   }
@@ -51,11 +52,21 @@ public class Producto {
     this.registerDate = registerDate;
   }
 
+  public Categoria getCategoria() {
+    return categoria;
+  }
+
+  public void setCategoria(Categoria categoria) {
+    this.categoria = categoria;
+  }
+
   @Override
   public String toString() {
+    String cat = (this.categoria == null) ?"No creada" : categoria.getName();
     return "id = " + id +
             ", name = " + name +
             ", price = " + price +
-            ", registerDate = " + registerDate;
+            ", registerDate = " + registerDate +
+            ", category = " + cat;
   }
 }
